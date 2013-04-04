@@ -1,0 +1,42 @@
+@{ Layout = null; }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Jasmine Spec Runner</title>
+  <link rel="shortcut icon" href="@Url.Content("~/Content/jasmine/jasmine_favicon.png")" />
+  <link rel="stylesheet" href="@Url.Content("~/Content/jasmine/jasmine.css")" />
+  <script src="@Url.Content("~/Scripts/specs/jasmine/jasmine.js")"></script>
+  <script src="@Url.Content("~/Scripts/specs/jasmine/jasmine-html.js")"></script>  
+
+  <!-- include your files here... -->
+
+  <script>
+    (function () {
+      var jasmineEnv = jasmine.getEnv();
+      jasmineEnv.updateInterval = 1000;
+
+      var htmlReporter = new jasmine.HtmlReporter();
+
+      jasmineEnv.addReporter(htmlReporter);
+
+      jasmineEnv.specFilter = function (spec) {
+        return htmlReporter.specFilter(spec);
+      };
+
+      var currentWindowOnload = window.onload;
+
+      window.onload = function () {
+        if (currentWindowOnload) {
+          currentWindowOnload();
+        }
+        execJasmine();
+      };
+
+      function execJasmine() {
+        jasmineEnv.execute();
+      }
+    })();
+  </script>
+</head>
+<body></body>
+</html>
